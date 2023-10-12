@@ -1,53 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/src/App.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+  <style>
+    @keyframes move-background {
+      from {
+        -webkit-transform: translate3d(0px, 0px, 0px);
+      }
+      to {
+        -webkit-transform: translate3d(1000px, 0px, 0px);
+      }
+    }
+
+    @-webkit-keyframes move-background {
+      from {
+        -webkit-transform: translate3d(0px, 0px, 0px);
+      }
+      to {
+        -webkit-transform: translate3d(1000px, 0px, 0px);
+      }
+    }
+
+    @-moz-keyframes move-background {
+      from {
+        -webkit-transform: translate3d(0px, 0px, 0px);
+      }
+      to {
+        -webkit-transform: translate3d(1000px, 0px, 0px);
+      }
+    }
+
+    @-webkit-keyframes move-background {
+      from {
+        -webkit-transform: translate3d(0px, 0px, 0px);
+      }
+      to {
+        -webkit-transform: translate3d(1000px, 0px, 0px);
+      }
+    }
+
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: -1;
+    }
+
+    .stars {
+      background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: block;
+    }
+
+    .twinkling {
+      width: 10000px;
+      height: 100%;
+      background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png") repeat;
+      background-size: 1000px 1000px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 0;
+
+      -moz-animation: move-background 70s linear infinite;
+      -ms-animation: move-background 70s linear infinite;
+      -o-animation: move-background 70s linear infinite;
+      -webkit-animation: move-background 70s linear infinite;
+      animation: move-background 70s linear infinite;
+    }
+    .nav-links ul li a {
+      font-size: 20px; /* Set the desired font size */
+      color: white;   /* Set the text color to white */
+      font-weight: bold; /* Set the font weight to bold */
+      text-decoration: none; /* Remove the default underline style */
+      margin-top: 10px; /* Set the top margin */
+    }
+
+    button {
+      --transition: 0.25s;
+      --spark: 3s;
+      --bg: black;
+      background: var(--bg);
+      padding: 6px 18px;
+      display: grid;
+      border-radius: 9999px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1000px 0 0 hsl(0 0% 20%) inset;
+      transition: box-shadow var(--transition), background var(--transition), transform var(--transition);
+      margin: 10px; /* Added margin for spacing */
+    }
+
+    button:hover .backdrop {
+      background: rgb(20, 20, 20);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .spark__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .spark {
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      animation: flip calc(var(--spark) * 2) infinite steps(2, end);
+    }
+
+    @keyframes flip {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .backdrop {
+      position: absolute;
+      inset: 1px;
+      background: var(--bg);
+      border-radius: 9999px;
+      transition: background var(--transition) opacity var(--transition);
+    }
+
+    .text {
+      z-index: 1;
+      color: rgb(203, 213, 225);
+    }
+
+  </style>
 </head>
 
+<body class="font-[Poppins] bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen">
 <div class="background-container">
   <div class="stars"></div>
   <div class="twinkling"></div>
-<!--  <div class="clouds"></div>-->
 </div>
-<div class="navbar bg-base-100">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <label tabindex="0" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-      </label>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>Item 1</a></li>
-        <li>
-          <a>Parent</a>
-          <ul class="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li>
-        <li><a>Item 3</a></li>
-      </ul>
-    </div>
-    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-      <li tabindex="0">
-        <details>
-          <summary>Parent</summary>
-          <ul class="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
-      <li><a>Item 3</a></li>
-    </ul>
-  </div>
-  <div class="navbar-end">
-    <a class="btn">Button</a>
-  </div>
+
+<div class="header-container">
+  <header>
+    <nav class="flex justify-between items-center w-[92%]  mx-auto">
+      <div>
+        <img class="w-16 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/5968/5968204.png" alt="...">
+      </div>
+      <div class="nav-links duration-500 md:static absolute bg-black md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
+        <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+          <li>
+            <a class="hover:text-gray-500" href="#">Products</a>
+          </li>
+          <li>
+            <a class="hover:text-gray-500" href="#">Solution</a>
+          </li>
+          <li>
+            <a class="hover:text-gray-500" href="#">Resource</a>
+          </li>
+          <li>
+            <a class="hover:text-gray-500" href="#">Developers</a>
+          </li>
+          <li>
+            <a class="hover:text-gray-500" href="#">Pricing</a>
+          </li>
+        </ul>
+      </div>
+      <button>
+        <span class="spark__container">
+          <span class="spark" />
+        </span>
+        <span class="backdrop" />
+        <span class="text">Shooting star border</span>
+      </button>
+    </nav>
+  </header>
 </div>
+
+<script>
+  const navLinks = document.querySelector('.nav-links');
+
+  function onToggleMenu(e) {
+    e.name = e.name === 'menu' ? 'close' : 'menu';
+    navLinks.classList.toggle('top-[9%]');
+  }
+</script>
+</body>
+
 </html>
