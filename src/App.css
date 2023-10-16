@@ -10,6 +10,7 @@
     -webkit-transform: translate3d(1000px, 0px, 0px);
   }
 }
+
 @-webkit-keyframes move-background {
   from {
     -webkit-transform: translate3d(0px, 0px, 0px);
@@ -37,12 +38,13 @@
   }
 }
 
-.background-container{
+.background-container {
   position: fixed;
   top: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   right: 0;
+  z-index: -1;
 }
 
 .stars {
@@ -53,11 +55,10 @@
   left: 0;
   right: 0;
   display: block;
-  z-index: 0;
 }
 
-.twinkling{
-  width:10000px;
+.twinkling {
+  width: 10000px;
   height: 100%;
   background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png") repeat;
   background-size: 1000px 1000px;
@@ -65,30 +66,242 @@
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 0;
 
-  -moz-animation:move-background 70s linear infinite;
-  -ms-animation:move-background 70s linear infinite;
-  -o-animation:move-background 70s linear infinite;
-  -webkit-animation:move-background 70s linear infinite;
-  animation:move-background 70s linear infinite;
-
+  -moz-animation: move-background 70s linear infinite;
+  -ms-animation: move-background 70s linear infinite;
+  -o-animation: move-background 70s linear infinite;
+  -webkit-animation: move-background 70s linear infinite;
+  animation: move-background 70s linear infinite;
+}
+.nav-links ul li a {
+  font-size: 20px; /* Set the desired font size */
+  color: white;   /* Set the text color to white */
+  font-weight: bold; /* Set the font weight to bold */
+  text-decoration: none; /* Remove the default underline style */
+  margin-top: 25px; /* Set the top margin */
 }
 
-/*.clouds{*/
-/*  width:10000px;*/
-/*  height: 100%;*/
-/*  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;*/
-/*  background-size: 1000px 1000px;*/
-/*  position: absolute;*/
-/*  right: 0;*/
-/*  top: 0;*/
-/*  bottom: 0;*/
-/*  z-index: 3;*/
+button {
+  --transition: 0.25s;
+  --spark: 3s;
+  --bg: black;
+  background: var(--bg);
+  padding: 6px 18px;
+  display: grid;
+  border-radius: 9999px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1000px 0 0 hsl(0 0% 20%) inset;
+  transition: box-shadow var(--transition), background var(--transition), transform var(--transition);
+  margin: 10px; /* Added margin for spacing */
+}
 
-/*  -moz-animation:move-background 150s linear infinite;*/
-/*  -ms-animation:move-background 150s linear infinite;*/
-/*  -o-animation:move-background 150s linear infinite;*/
-/*  -webkit-animation:move-background 150s linear infinite;*/
-/*  animation:move-background 150s linear infinite;*/
-/*}*/
+button:hover .backdrop {
+  background: rgb(20, 20, 20);
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.spark__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.spark {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  animation: flip calc(var(--spark) * 2) infinite steps(2, end);
+}
+
+@keyframes flip {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.backdrop {
+  position: absolute;
+  inset: 1px;
+  background: var(--bg);
+  border-radius: 9999px;
+  transition: background var(--transition) opacity var(--transition);
+}
+
+body{
+  overflow: hidden;
+}
+
+section{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  /* https://lh3.googleusercontent.com/ka_5IYJDRkXZnbptxq64LPuggGL5FM8gnpJlsuSiOQh4b39kMkiRbVfX8iK8bjMg5SLkdfoix09P60wyFjN2=w681-h614 */
+  background: url("https://i.postimg.cc/c1Q3njM0/bg2.jpg");
+  /*   background-color:black; */
+  background-size: cover;
+  animation: animateBg 50s linear infinite;
+}
+
+
+span{
+  position: absolute;
+  top:50%;
+  left:50%;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.1),0 0 0 8px rgba(255,255,255,0.1),0 0 20px rgba(255,255,255,0.1);
+  animation: animate 3s linear infinite;
+}
+span::before{
+  content:'';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 1px;
+  background: linear-gradient(90deg,#fff,transparent);
+}
+@keyframes animate {
+  0% {
+    transform: rotate(315deg) translateX(0);
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(315deg) translateX(-1000px);
+    opacity: 0;
+  }
+}
+
+span:nth-child(1) {
+  top: 0;
+  right: 0;
+  left: initial;
+  animation-delay: 0s;
+  animation-duration: 4s; /* Adjusted duration */
+}
+
+span:nth-child(2) {
+  top: 0;
+  right: 80px;
+  left: initial;
+  animation-delay: 0.2s;
+  animation-duration: 6s; /* Adjusted duration */
+}
+
+span:nth-child(3) {
+  top: 80px;
+  right: 0px;
+  left: initial;
+  animation-delay: 0.4s;
+  animation-duration: 5s; /* Adjusted duration */
+}
+
+span:nth-child(4) {
+  top: 0;
+  right: 180px;
+  left: initial;
+  animation-delay: 0.6s;
+  animation-duration: 4s; /* Adjusted duration */
+}
+
+span:nth-child(5) {
+  top: 0;
+  right: 400px;
+  left: initial;
+  animation-delay: 0.8s;
+  animation-duration: 6s; /* Adjusted duration */
+}
+
+span:nth-child(6) {
+  top: 0;
+  right: 600px;
+  left: initial;
+  animation-delay: 1s;
+  animation-duration: 7s; /* Adjusted duration */
+}
+
+span:nth-child(7) {
+  top: 300px;
+  right: 0px;
+  left: initial;
+  animation-delay: 1.2s;
+  animation-duration: 3.5s; /* Adjusted duration */
+}
+
+span:nth-child(8) {
+  top: 0px;
+  right: 700px;
+  left: initial;
+  animation-delay: 1.4s;
+  animation-duration: 2.5s; /* Adjusted duration */
+}
+
+span:nth-child(9) {
+  top: 0px;
+  right: 1000px;
+  left: initial;
+  animation-delay: 0.75s;
+  animation-duration: 4.5s; /* Adjusted duration */
+}
+span:nth-child(10) {
+  top: 0px;
+  right: 450px;
+  left: initial;
+  animation-delay: 2.75s;
+  animation-duration: 3.75s; /* Adjusted duration */
+}
+
+.swiper-container {
+  width: 100%;
+  height: 400px; /* Adjust the height as needed */
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.social-icons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon {
+  width: 20px; /* Adjust the width as needed */
+  height: 20px; /* Adjust the height as needed */
+}
+.rounded-rectangle {
+  background-color: #1DB954; /* Spotify Green Color */
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.spotify-logo {
+  width: 24px; /* Adjust the size as needed */
+  height: 24px; /* Adjust the size as needed */
+  margin-right: 10px;
+}
+
+.track-info {
+  font-weight: bold;
+}
+
